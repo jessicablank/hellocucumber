@@ -9,13 +9,9 @@ function isItFriday(today) {
    }
   }
 
-Given('today is Sunday', function () {
-    this.today = 'Sunday';
+Given('today is {string}', function (givenDay) {
+    this.today = givenDay;
   });
-
-Given('today is Friday', function(){
-    this.today = 'Friday';
-})
 
   When('I ask whether it\'s Friday yet', function () {
     this.actualAnswer = isItFriday(this.today);
