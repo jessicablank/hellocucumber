@@ -17,10 +17,7 @@
     "url": "https://github.com/jessicablank/hellocucumber/issues"
   },
   "homepage": "https://github.com/jessicablank/hellocucumber#readme",
-  "dependencies": {
-    "@cucumber/cucumber": "^7.0.0"
-  },
   "devDependencies": {
-    "cucumber": "^7.0.0"
+    "@cucumber/cucumber": "^7.0.0"
   }
 }
