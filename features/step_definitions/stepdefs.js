@@ -2,7 +2,7 @@ const assert = require('assert');
 const { Given, When, Then } = require('@cucumber/cucumber');
 
 function isItFriday(today) {
-    return 'Nope';
+   this.today = 'Friday';
   }
 
 Given('today is Sunday', function () {
