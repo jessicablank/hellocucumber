@@ -11,5 +11,15 @@ My Gherkin Work Shop 🥒
 
 ### 2. Successfully translate the .feature files into another file format. 
 * I want to export the original feature files themselves, not the test results, so that I can use [Pandoc](https://pandoc.org/scripting-1.11.html) to create documentation for my BDD tests. 
-* I found a glorious simple solution written by an awesome developer at this repo [https://github.com/melke/features2html](https://github.com/melke/features2html). I've updated his code to ES6 syntax and I most certainly owe Mr. Melke a coffee or a beer. 
+* I found a glorious solution written by an awesome developer at this repo [https://github.com/melke/features2html](https://github.com/melke/features2html). In true open-source fashion, I've borrowed his code to play with.
 
+
+* Running `npm start` will generate an HTML document from the .feature files contained within 
+* Limitations: The current template does not recognize a gherkin table so that feature file is returned with ipsum text.
+
+## As a developer, I want a simple solution for parsing my gherkin files into 
+
+### What is BDD
+* Discovery
+* Formulation
+* Automation

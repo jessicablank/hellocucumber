@@ -1,16 +1,35 @@
+//Bootstrapped from Vhttps://github.com/melke/features2html
+
+//yargs example:
+require('yargs')
+  .scriptName("pirate-parser")
+  .usage('$0 <cmd> [args]')
+  .command('hello [name]', 'welcome ter yargs!', (yargs) => {
+    yargs.positional('name', {
+      type: 'string',
+      default: 'Cambi',
+      describe: 'the name to say hello to'
+    })
+  }, function (argv) {
+    console.log('hello', argv.name, 'welcome to yargs!')
+  })
+  .help()
+  .argv
+
+
 // DEFAULT SETTINGS
-const FILE_ENCODING = 'utf-8';
-const INPUTDIR = 'examples/features';
-const TEMPLATESDIR = 'default/templates';
-const PRODUCTNAME = 'My Product Name';
-const AUTHOR = 'John Doe';
-const OUTPUTFILE = null;
-const LANGUAGE = 'en';
-const BREAKBEFOREWORD = null;
-const DOCTEMPLATE, FEATURETEMPLATE;
+let FILE_ENCODING = 'utf-8';
+let INPUTDIR = 'input/features';
+let TEMPLATESDIR = 'default/templates';
+let PRODUCTNAME = 'My Product Name';
+let AUTHOR = 'Arthur';
+let OUTPUTFILE = null;
+let LANGUAGE = 'en';
+let BREAKBEFOREWORD = null;
+let DOCTEMPLATE, FEATURETEMPLATE;
 
 // MODULES
-const commander = require('commander'),
+let commander = require('commander'),
   fs = require('fs'),
   handlebars = require('handlebars'),
   linereader = require('line-reader'),
@@ -24,7 +43,7 @@ const commander = require('commander'),
 // options
 commander
   .version('0.1')
-  .option('-i, --input-dir [path]', 'read feature files from path (default: examples/features)')
+  .option('-i, --input-dir [path]', 'read feature files from path (default: features)')
   .option('-t, --templates-dir [path]', 'read the files doc_template.html, feature_template.html and style.css from path (default: default/templates)')
   .option('-o, --output-file [path]', 'send output to file path (default: output_features2html/feature_YYYYMMDD_HHmm.html)')
   .option('-p, --product-name [string]', 'The name of your product used in headline and header (default: My Product Name)')
@@ -67,25 +86,25 @@ function createCommand() {
 }
 
 function create(){
-  const docHandlebarTemplate = handlebars.compile(fs.readFileSync(DOCTEMPLATE, FILE_ENCODING));
-  const featureHandlebarTemplate = handlebars.compile(fs.readFileSync(FEATURETEMPLATE, FILE_ENCODING));
-  const cssStyles = fs.readFileSync(TEMPLATESDIR + '/style.css', FILE_ENCODING);
+  let docHandlebarTemplate = handlebars.compile(fs.readFileSync(DOCTEMPLATE, FILE_ENCODING));
+  let featureHandlebarTemplate = handlebars.compile(fs.readFileSync(FEATURETEMPLATE, FILE_ENCODING));
+  let cssStyles = fs.readFileSync(TEMPLATESDIR + '/style.css', FILE_ENCODING);
 
   parseFeatures(function(features) {
 
-    const featuresHtml = '';
+    let featuresHtml = '';
     if (features) {
-      for (const i = 0; i < features.length; i++) {
+      for (let i = 0; i < features.length; i++) {
         featuresHtml += featureHandlebarTemplate(features[i]);
       }
     }
-    const docData = new Object();
+    let docData = new Object();
     docData.cssStyles = cssStyles;
     docData.creationdate = moment().format('LL');
     docData.author = AUTHOR;
     docData.productname = PRODUCTNAME;
     docData.featuresHtml = featuresHtml;
-    const docHtml = docHandlebarTemplate(docData);
+    let docHtml = docHandlebarTemplate(docData);
 
     if (OUTPUTFILE) {
       writeOutput(docHtml, OUTPUTFILE);
@@ -93,7 +112,7 @@ function create(){
       // write to default output dir. Create first if necessary
       fs.mkdir('output',function(e){
         if(!e || (e && e.code === 'EEXIST')){
-          const outputFilepath = 'output/features_' + moment().format('YYYYMMDD_HHmm') + '.html';
+          let outputFilepath = 'output/features_' + moment().format('YYYYMMDD_HHmm') + '.html';
           writeOutput(docHtml, outputFilepath);
         } else {
           console.log(e);
@@ -114,12 +133,12 @@ function writeOutput(html, outputfile) {
 
 function parseFeatures(callback) {
 
-  const allFiles = fs.readdirSync(INPUTDIR);
-  const featureFiles = underscore.filter(allFiles, function(item) {
+  let allFiles = fs.readdirSync(INPUTDIR);
+  let featureFiles = underscore.filter(allFiles, function(item) {
     return underscorestring.endsWith(item,'.feature');
   });
-  const sortedFeatureFiles = featureFiles.sort();
-  const sortedFeaturesFullpath = underscore.map(sortedFeatureFiles, function(filename) {
+  let sortedFeatureFiles = featureFiles.sort();
+  let sortedFeaturesFullpath = underscore.map(sortedFeatureFiles, function(filename) {
      return INPUTDIR + '/' + filename;
   });
 
@@ -130,15 +149,15 @@ function parseFeatures(callback) {
 
 function parseFeatureFile(featureFilename, callback) {
 
-  const feature = new Object();
+  let feature = new Object();
   feature.background = '';
   feature.scenarios = [];
-  const scenario = new Object();
+  let scenario = new Object();
   scenario.content = '';
 
-  const foundMultirowScenario = false;
-  const featureLineWasFound = false;
-  const scenariosStarted = false;
+  let foundMultirowScenario = false;
+  let featureLineWasFound = false;
+  let scenariosStarted = false;
 
   linereader.eachLine(featureFilename, function(line) {
 
@@ -172,7 +191,7 @@ function parseFeatureFile(featureFilename, callback) {
 
     if (!i18nStringContains(line, 'feature') && !scenariosStarted && featureLineWasFound) {
        // Everything between feature and first scenario goes into feature.background, except background keyword
-       const fixedline = BREAKBEFOREWORD ? line.replace(BREAKBEFOREWORD, '</p><p class="p-after-p">' + BREAKBEFOREWORD) : line;
+       let fixedline = BREAKBEFOREWORD ? line.replace(BREAKBEFOREWORD, '</p><p class="p-after-p">' + BREAKBEFOREWORD) : line;
        fixedline = fixedline + '<br/>';
        feature.background = feature.background + ' ' + fixedline.replace(i18n.t('background'), '');
     }
