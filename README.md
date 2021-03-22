@@ -4,7 +4,7 @@ My Gherkin Work Shop 🥒
 ## Feel feel to clone and create your own work shop. 
 * Remember to `npm i` those dependencies.
 
-## I had two goals with this repo:
+## Goals for this repo:
 
 ### 1. Successfully follow along with the tutorial at [Cucumber.io](https://cucumber.io/docs/guides/10-minute-tutorial/) for JavaScript.  
 * It does! Run `npm test` to see the passing Gherkin scenarios
@@ -17,7 +17,12 @@ My Gherkin Work Shop 🥒
 * Running `npm start` will generate an HTML document from the .feature files contained within 
 * Limitations: The current template does not recognize a gherkin table so that feature file is returned with ipsum text.
 
-## As a developer, I want a simple solution for parsing my gherkin files into 
+3. I also wanted to play with [yargs](https://yargs.js.org/) vs [commander](https://www.npmjs.com/package/commander) for command line interactions. 
+* Run `npm index.js --name Parrot` to see a fun hello!
+
+
+
+
 
 ### What is BDD
 * Discovery
