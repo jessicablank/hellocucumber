@@ -14,11 +14,11 @@ Then I should see <product>
 
 @ID-2
 Scenario: Pasta al Fiorella
-Given I say <order>
+Given I say "<order>"
 When I check the replicator
-Then I should see <product>
+Then I should see "<product>"
 
 Examples:
-| order               | product            |
-| "Earl Grey Hot"     | "a hot cup of tea" |
-| "Pasta al Fiorella" | "a pasta bowl"     |
+| order             | product          |
+| Earl Grey Hot     | a hot cup of tea |
+| Pasta al Fiorella | a pasta bowl     |
