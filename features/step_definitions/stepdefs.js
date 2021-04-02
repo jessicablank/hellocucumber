@@ -20,3 +20,23 @@ Given('today is {string}', function (givenDay) {
   Then('I should be told {string}',  function (expectedAnswer) {
     assert.strictEqual(this.actualAnswer, expectedAnswer);
   });
+
+  function replicatorTest(order) {
+    if (order === "Earl Grey Hot"){
+        return "a hot cup of tea";
+    } else {
+        return "a pasta bowl";
+    }
+   }
+ 
+ Given('I say {string}', function (givenOrder) {
+     this.order = givenOrder;
+   });
+ 
+   When('I check the replicator', function () {
+     this.actualProduct = replicatorTest(this.order);
+   });
+ 
+   Then('I should see {string}',  function (product) {
+     assert.strictEqual(this.actualProduct, product);
+   });
